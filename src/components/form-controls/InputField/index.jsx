@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
-import Input from "@material-ui/core/Input";
+
 import { TextField } from '@material-ui/core';
 
 InputField.propTypes = {
@@ -16,20 +16,22 @@ InputField.defaultProps = {
     disabled: false,
 }
 function InputField(props) {
-    const {form, name, label, disabled } = props;
-    const {formState} = form;
+    const { form, name, label, disabled } = props;
+    const { formState } = form;
     console.log("Form", form);
     const hasErrors = formState.touchedFields[name] && formState.errors[name];
     return (
         <Controller
-        name={name}
-        control={form.control}
-        render={({ field }) => <TextField {...field} />}
-        
-        fullWidth
-        disabled={disabled}
-        label={label}
-      />
+            name={name}
+            control={form.control}
+            render={({ field }) => <TextField {...field} />}
+
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            disabled={disabled}
+            label={label}
+        />
     );
 }
 
