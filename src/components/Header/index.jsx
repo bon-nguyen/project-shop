@@ -1,20 +1,19 @@
+import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import CodeIcon from '@material-ui/icons/Code';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import React from 'react';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Register from '../../features/Auth/components/Register';
+import RegisterForm from '../../features/Auth/components/RegisterForm';
+
+
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -56,7 +55,6 @@ export default function Header() {
               Project Car
             </Typography>
             <Button color="inherit">Login</Button>
-            <Button color="inherit">Login</Button>
             <Button color="inherit"
               onClick={handleClickOpen}
             >Register</Button>
@@ -65,29 +63,15 @@ export default function Header() {
         </AppBar>
       </div>
 
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
-      >
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogContent>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Register />
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancel
-            </Button>
-          </DialogActions>
+            <Register/>
         </DialogContent>
-
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+        </DialogActions>
       </Dialog>
     </>
   );

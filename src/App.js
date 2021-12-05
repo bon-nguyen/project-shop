@@ -7,8 +7,10 @@ import Header from './components/Header';
 function App() {
   useEffect(() => {
     const fetchProducts = async () => {
+      const params = {
+        _limit: 10,
+      }
       const productList = await productApi.getAll();
-      console.log(productList);
     }
 
     fetchProducts();

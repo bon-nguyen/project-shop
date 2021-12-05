@@ -1,39 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Controller } from 'react-hook-form';
-
-import { TextField } from '@material-ui/core';
-
+import { Controller } from "react-hook-form";
+import TextField from '@material-ui/core/TextField';
 InputField.propTypes = {
     form: PropTypes.object.isRequired,
-    type: PropTypes.string,
+    name: PropTypes.string.isRequired,
     label: PropTypes.string,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.string,
 };
-InputField.defaultProps = {
-    type: 'text',
-    label: '',
-    disabled: false,
-}
+
 function InputField(props) {
     const { form, name, label, disabled } = props;
     const { formState } = form;
-    console.log("Form", form);
-    const hasErrors = formState.touchedFields[name] && formState.errors[name];
+    const hasError = formState.touchedFields && formState.errors[name];
+
     return (
         <Controller
-            name={name}
             control={form.control}
-            render={({ field }) => <TextField {...field} />}
+            name={name}
+            render={({ field: { onChange, value } }) => (
+                <TextField 
+                    onChange={onChange}
+                    value={value}
+                    label={label}
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    disabled={disabled}
+                    error={!!hasError}
+                    helperText={formState.errors[name]?.message}
+                />
+                
+            )}
 
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            disabled={disabled}
-            label={label}
         />
     );
 }
-
 
 export default InputField;
