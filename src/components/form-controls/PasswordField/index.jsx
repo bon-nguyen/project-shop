@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Controller } from "react-hook-form";
-import TextField from '@material-ui/core/TextField';
 import { FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 PasswordField.propTypes = {
@@ -31,13 +30,14 @@ function PasswordField(props) {
             render={({ field: { onChange, value } }) => (
                 <>
                     <OutlinedInput
-                        id="outlined-adornment-password"
+                        id={name}
                         type={showPassword ? 'text' : 'password'}
                         onChange={onChange}
+                        value={value}
                         endAdornment={
                         <InputAdornment position="end">
                             <IconButton
-                            aria-label="toggle password visibility"
+                   
                             onClick={toggleShowPassword}
                             onMouseDown={toggleShowPassword}
                             edge="end"
@@ -52,7 +52,7 @@ function PasswordField(props) {
                         
                     />
                     {!!hasError && (
-                    <FormHelperText error id="accountId-error">
+                    <FormHelperText error id={name}>
                        {formState.errors[name]?.message}
                     </FormHelperText>
             )}

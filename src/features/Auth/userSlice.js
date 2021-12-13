@@ -2,17 +2,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import userApi from '../../api/userApi';
 
 
-const initialState = {
-  current: {},
-  settings: {},
-}
-
 // First, create the thunk
-const fetchUserById = createAsyncThunk(
+export const register = createAsyncThunk(
     'user/register',
     async (payload) => {
-      const data = await userApi.fetchById(payload);
-
+      // Call API register
+      const data = await userApi.register(payload);
+      
       // save data to local storage
       localStorage.setItem('access_token', data.jwt);
       localStorage.setItem('user', JSON.stringify(data.user));
@@ -21,15 +17,18 @@ const fetchUserById = createAsyncThunk(
     }
 );
   
-
+    
 const userSlice = createSlice({
   name: 'user',
-  initialState,
+  initialState: {
+    current: {},
+    settings: {},
+  },
   reducers: {
 
   },
   extraReducers: {
-    [fetchUserById.fulfilled]: (state, action) => {
+    [register.fulfilled]: (state, action) => {
         state.current = action.payload
     },
   }
