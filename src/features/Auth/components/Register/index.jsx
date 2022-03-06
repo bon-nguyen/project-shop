@@ -17,7 +17,7 @@ function Register(props) {
         try {
             // Auto set username equal email
             values.username = values.email;
-            
+
             const action = register(values);
             const resultAction = await dispatch(action);
             const user = unwrapResult(resultAction);
