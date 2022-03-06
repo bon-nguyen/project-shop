@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import PasswordField from '../../../../components/form-controls/PasswordField';
 
 
-RegisterForm.propTypes = {
+LoginForm.propTypes = {
     onSubmit: PropTypes.func,
 };
 const useStyles = makeStyles((theme) => ({
@@ -28,20 +28,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function RegisterForm(props) {
+function LoginForm(props) {
     const classes = useStyles();
     const scheme = yup.object().shape({
-        fullName: yup.string().required('Full name is required'),
-        email: yup.string().email('Must be a valid email').max(255).required('Email is required'),
+        identifier: yup.string().email('Must be a valid email').max(255).required('Email is required'),
         password: yup.string().min(6).max(255).required('Password is required'),
-        confirmPassword: yup.string().required('Please confirm your passowrd').oneOf([yup.ref('password')], 'Password does not match'),
     });
     const form = useForm({
         defaultValues:{
-            fullName: '',
-            email: '',
+            identifier: '',
             password: '',
-            confirmPassword: '',
         },
         resolver: yupResolver(scheme),
     });
@@ -62,10 +58,8 @@ function RegisterForm(props) {
                 <LockOutlinedIcon />
             </Avatar>
             <form onSubmit={form.handleSubmit(handleSubmit)}>
-                <InputField name="fullName" label="Full Name" form={form}/>
-                <InputField name="email" label="Email" form={form}/>
+                <InputField name="identifier" label="Email" form={form} />
                 <PasswordField name="password" label="Password" form={form} />
-                <PasswordField name="confirmPassword" label="Confirm Password" form={form} />
                 <Button
                     type="submit"
                     fullWidth
@@ -74,11 +68,11 @@ function RegisterForm(props) {
                     className={classes.submit}
                     disabled={isSubmitting}
                 >
-                Sign In
+                Login
             </Button>
             </form>
         </div>
     );
 }
 
-export default RegisterForm;
+export default LoginForm;
