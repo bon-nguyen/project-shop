@@ -12,7 +12,6 @@ axiosClient.interceptors.request.use(function (config) {
    
     return config;
 }, function (error) {
-    console.log("147",error);
     return Promise.reject(error);
 });
 

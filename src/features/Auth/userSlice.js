@@ -42,8 +42,8 @@ const userSlice = createSlice({
   reducers: {
     logout(state){
       // clear local storage
-      localStorage.removeItem(localStorage.USER);
-      localStorage.removeItem(localStorage.TOKEN);
+      localStorage.removeItem(StorageKeys.USER);
+      localStorage.removeItem(StorageKeys.TOKEN);
       state.current = {};
     }
   },
