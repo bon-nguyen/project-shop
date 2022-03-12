@@ -12,17 +12,18 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
+    "dompurify": "^2.3.6",
     "node-sass": "^6.0.1",
     "notistack": "^1.0.10",
     "query-string": "^7.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hook-form": "^7.20.5",
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.2.1",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "yupyupyup": "^7.20.5"
   },
   "scripts": {
     "start": "react-scripts start",

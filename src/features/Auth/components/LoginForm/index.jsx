@@ -59,7 +59,7 @@ function LoginForm(props) {
             </Avatar>
             <form onSubmit={form.handleSubmit(handleSubmit)}>
                 <InputField name="identifier" label="Email" form={form} />
-                <PasswordField name="password" label="Password" form={form} />
+                <PasswordField name="password" label="Password" form={form} labelWidth={70} />
                 <Button
                     type="submit"
                     fullWidth

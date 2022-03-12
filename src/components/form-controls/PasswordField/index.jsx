@@ -8,10 +8,11 @@ PasswordField.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string,
     disabled: PropTypes.string,
+    labelWidth: PropTypes.number,
 };
 
 function PasswordField(props) {
-    const { form, name, label, disabled } = props;
+    const { form, name, label, disabled, labelWidth } = props;
     const { formState } = form;
     const hasError = formState.touchedFields && formState.errors[name];
     
@@ -46,7 +47,7 @@ function PasswordField(props) {
                             </IconButton>
                         </InputAdornment>
                         }
-                        labelWidth={70}
+                        labelWidth={labelWidth}
                         disabled ={disabled}
                         error={!!hasError}
                         

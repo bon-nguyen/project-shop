@@ -4,6 +4,7 @@ import { Route, useRouteMatch, Switch } from 'react-router-dom';
 
 import ListPage from './pages/ListPage';
 import { Box } from '@material-ui/core';
+import DetailPage from './pages/DetailPage';
 
 ProductFeature.propTypes = {
     
@@ -17,6 +18,7 @@ function ProductFeature(props) {
         <Box pt={4}>
             <Switch>
                <Route path={match.url} exact component={ListPage} />
+               <Route path={`${match.url}/:productId`} component={DetailPage} />
             </Switch>
         </Box>
     );

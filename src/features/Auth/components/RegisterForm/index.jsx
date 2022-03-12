@@ -62,10 +62,10 @@ function RegisterForm(props) {
                 <LockOutlinedIcon />
             </Avatar>
             <form onSubmit={form.handleSubmit(handleSubmit)}>
-                <InputField name="fullName" label="Full Name" form={form}/>
+                <InputField name="fullName" label="Full Name" form={form} />
                 <InputField name="email" label="Email" form={form}/>
-                <PasswordField name="password" label="Password" form={form} />
-                <PasswordField name="confirmPassword" label="Confirm Password" form={form} />
+                <PasswordField name="password" label="Password" form={form} labelWidth={75} />
+                <PasswordField name="confirmPassword" label="Confirm Password" form={form} labelWidth={140} />
                 <Button
                     type="submit"
                     fullWidth
