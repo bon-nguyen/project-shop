@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -8,14 +8,27 @@ import {
   BrowserRouter as Router,
 } from "react-router-dom";
 import { SnackbarProvider } from 'notistack';
+import Preloader from './components/UIElements/Preloader/Preloader';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: 'rgb(26, 148, 255)',
+    }
+  }
+});
 
 ReactDOM.render(
     <Provider store={store}>
-       <Router>
-        <SnackbarProvider maxSnack={3} anchorOrigin={{vertical: 'top', horizontal: 'right'}}>
-          <App />
-        </SnackbarProvider>
-      </Router>
+      <Suspense fallback={<Preloader/>}>
+        <MuiThemeProvider theme={theme}>
+          <Router>
+            <SnackbarProvider maxSnack={3} anchorOrigin={{vertical: 'top', horizontal: 'right'}}>
+              <App />
+            </SnackbarProvider>
+          </Router>
+        </MuiThemeProvider>
+      </Suspense>
     </Provider>,
   document.getElementById('root')
 );

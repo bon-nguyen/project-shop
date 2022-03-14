@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Grid, LinearProgress, makeStyles, Paper } from '@material-ui/core';
+import { Box, Container, Grid, makeStyles, Paper } from '@material-ui/core';
 import ProductThumbnail from '../components/ProductThumbnail';
 import { useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
 import useProductDetail from '../components/hooks/useProductDetail';
@@ -11,6 +11,9 @@ import { Route } from 'react-router-dom';
 import ProductDescription from '../components/ProductDescription';
 import ProductAddtional from '../components/ProductAddtional';
 import ProductReviews from '../components/ProductReviews';
+import Preloader from '../../../components/UIElements/Preloader/Preloader';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../Cart/cartSlice';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function DetailPage(props) {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const {
         params: {productId},
         url
@@ -51,13 +55,17 @@ function DetailPage(props) {
     const { product, loading } = useProductDetail(productId);
 
     if(loading){
-        return <Box>
-            <LinearProgress className={classes.loading} />
-        </Box>
+        return <Box components={<Preloader />}></Box>
     }
-
     const handleAddCartSubmit = (formValue)=> {
         console.log("formValue", formValue);
+        const action = addToCart({
+            id: product.id,
+            product,
+            quantity: formValue.quantity,
+        });
+        console.log("action", action);
+        dispatch(action)
     }
 
     return (
