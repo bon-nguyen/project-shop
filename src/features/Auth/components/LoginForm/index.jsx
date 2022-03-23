@@ -58,7 +58,7 @@ function LoginForm(props) {
                 <LockOutlinedIcon />
             </Avatar>
             <form onSubmit={form.handleSubmit(handleSubmit)}>
-                <InputField name="identifier" label="Email" form={form} />
+                <InputField name="identifier" label="Email" form={form}/>
                 <PasswordField name="password" label="Password" form={form} labelWidth={70} />
                 <Button
                     type="submit"

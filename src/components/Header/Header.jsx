@@ -6,68 +6,90 @@ import Register from '../../features/Auth/components/Register';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { logout } from '../../features/Auth/userSlice';
-import { AppBar, Box, Button, Dialog, DialogContent, IconButton, InputBase, makeStyles, Menu, MenuItem, Toolbar, Typography, Container, alpha, Badge } from '@material-ui/core';
+import { AppBar, Box, Button, Dialog, DialogContent, IconButton, InputBase, makeStyles, Menu, MenuItem, Toolbar, Container, alpha, Badge } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
 import Logo from '../Logo/Logo';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {cartItemsCountSelector} from '../../features/Cart/selectors';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  grow: {
     flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
   },
   title: {
-    flexGrow: 1,
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  buttonClose: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-    zIndex: 1,
-  },
-  wrap: {
-    padding: '0',
-  },
-
   search: {
     position: 'relative',
-    display: 'flex',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     '&:hover': {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
-    marginRight: theme.spacing(2),
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
+      marginLeft: theme.spacing(1),
       width: 'auto',
     },
   },
-
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   inputRoot: {
     color: 'inherit',
   },
-
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
     },
-  }
+  },
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
+  },
+  sectionMobile: {
+    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
 
+  container:{
+    paddingLeft: '0',
+    paddingRight: '0',
+  },
+
+  buttonClose: {
+    position: 'absolute',
+    top: "10px",
+    right: '10px',
+  }
 }));
 
 const MODE = {
@@ -82,7 +104,6 @@ export default function Header() {
   const loggedIn = useSelector( state => state.user.current );
   const isLoggedIn = !!loggedIn.id;
   const cartItemsCount = useSelector(cartItemsCountSelector);
-  console.log("cartItemsCount", cartItemsCount);
   const [open, setOpen] = useState(false);
   const [mode, setMode ] = useState(MODE.LOGIN);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -113,47 +134,50 @@ export default function Header() {
   }
   return (
     <>
-      <div className={classes.root}>
-        <AppBar position="static" >
-          <Container maxWidth="lg">
-            <Toolbar className={classes.wrap}>
-              <Logo />
-              <div className={classes.search}>
-                <InputBase
-                  placeholder="Search…"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  inputProps={{ 'aria-label': 'search' }}
-                />
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
+      <div className={classes.grow}>
+        <AppBar position="static">
+            <Container className={classes.container}>
+              <Toolbar>
+                <Logo />
+                <div className={classes.grow} />
+                <div className={classes.search}>
+                      <div className={classes.searchIcon}>
+                        <SearchIcon />
+                      </div>
+                      <InputBase
+                        placeholder="Search…"
+                        classes={{
+                          root: classes.inputRoot,
+                          input: classes.inputInput,
+                        }}
+                        inputProps={{ 'aria-label': 'search' }}
+                      />
+                  </div>
+                <div className={classes.sectionDesktop}>
+
+
+                  {
+                    !isLoggedIn && (
+                      <Button color="inherit"
+                        onClick={handleClickOpen}
+                      >Login</Button>
+                    )
+                  }
+                  {
+                    isLoggedIn && (
+                      <IconButton aria-controls="simple-menu" color="inherit" aria-haspopup="true" onClick={handleUserClick}>
+                        <AccountCircle />
+                      </IconButton>
+                    )
+                  }
+                  <IconButton aria-label="show 4 new mails" color="inherit" onClick={handleCartClick}>
+                    <Badge badgeContent={cartItemsCount} color="secondary">
+                      <ShoppingCartIcon />
+                    </Badge>
+                  </IconButton>
               </div>
-              <div className={classes.sectionDesktop}>
-                {
-                  !isLoggedIn && (
-                    <Button color="inherit"
-                      onClick={handleClickOpen}
-                    >Login</Button>
-                  )
-                }
-                {
-                  isLoggedIn && (
-                    <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleUserClick}>
-                      <AccountCircle />
-                    </IconButton>
-                  )
-                }
-                <IconButton aria-label="show 4 new mails" color="inherit" onClick={handleCartClick}>
-                  <Badge badgeContent={cartItemsCount} color="secondary">
-                    <ShoppingCartIcon />
-                  </Badge>
-                </IconButton>
-            </div>
-            </Toolbar>
-          </Container>
+              </Toolbar>
+            </Container>
         </AppBar>
         <Menu
           anchorEl={anchorEl}

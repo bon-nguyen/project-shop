@@ -1,7 +1,7 @@
 import React from 'react';
-import { Avatar, Link as LinkM, makeStyles } from '@material-ui/core';
+import { Link as LinkM, makeStyles } from '@material-ui/core';
 import { Link as LinkR } from 'react-router-dom'
-import logoimg from'./../../assets/images/logo.png';
+import logoImg from'./../../assets/images/logo.png';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,7 +23,7 @@ function Logo(props) {
     const classes = useStyles();
     return (
         <LinkM component={LinkR} to='/' className={classes.root}>
-            <img src={logoimg} alt="Logo" />
+            <img src={logoImg} alt="Logo" />
         </LinkM>
 
     );

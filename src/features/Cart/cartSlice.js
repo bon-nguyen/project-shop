@@ -38,10 +38,12 @@ const cartSlice = createSlice({
             if(index >= 0){
                 state.cartItems[index].quantity = quantity;
             }
+
         },
 
         removeFormCart(state, action){
             const idNeedToRemove = action.payload;
+            console.log("idneedtoRemove",idNeedToRemove);
             state.cartItems = state.cartItems.filter(x => x.id !== idNeedToRemove);
         },
     },

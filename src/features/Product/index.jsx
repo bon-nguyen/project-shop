@@ -8,7 +8,6 @@ function ProductFeature(props) {
     const match = useRouteMatch();
 
     return (
-
         <Box pt={4} pb={4}>
             <Switch>
                <Route path={match.url} exact component={ListPage} />

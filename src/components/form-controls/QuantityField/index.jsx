@@ -15,7 +15,7 @@ const useStyles = makeStyles( (theme)=> ({
     root: {},
 
     box: {  
-       maxWidth: '200px',
+       maxWidth: '160px',
        display: 'flex',
        flexFlow: 'row nowrap',
        alignItems: 'center',
@@ -52,7 +52,6 @@ function QuantityField(props) {
                         value={value}
                         disabled ={disabled}
                         error={!!hasError}
-                        
                     />
                     <IconButton onClick={ () => setValue(name, Number.parseInt(value) ? Number.parseInt(value) + 1 : 1)}>
                         <AddCircleOutline />

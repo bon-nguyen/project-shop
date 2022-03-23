@@ -64,7 +64,7 @@ function DetailPage(props) {
             product,
             quantity: formValue.quantity,
         });
-        console.log("action", action);
+
         dispatch(action)
     }
 

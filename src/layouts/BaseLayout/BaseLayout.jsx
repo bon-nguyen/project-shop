@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Footer from '../../components/Footer/Footer';
+
 import Header from '../../components/Header/Header';
 import {Box , makeStyles} from '@material-ui/core';
+import Footer from '../../components/Footer/Footer';
 
 BaseLayout.propTypes = {
     children: PropTypes.object,

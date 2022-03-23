@@ -1,7 +1,6 @@
 import React from 'react';
 import BaseLayout from '../../layouts/BaseLayout/BaseLayout';
-import ImageError from '../../assets/images/mascot_404.png';
-import { Box, Grid, makeStyles, Paper, Typography, Container } from '@material-ui/core';
+import { Grid, makeStyles, Paper, Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
 

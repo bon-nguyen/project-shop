@@ -1,15 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Box, Container, Grid, Typography, makeStyles, IconButton, Paper  } from '@material-ui/core'
 import GitHubIcon from '@material-ui/icons/GitHub';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TelegramIcon from '@material-ui/icons/Telegram';
-import Logo from '../Logo/Logo';
 
-
-Footer.propTypes = {
-    
-};
 
 const useStyles = makeStyles((theme) => ({
     root: {
